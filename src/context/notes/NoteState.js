@@ -35,18 +35,7 @@ const NoteState=(props)=>{
           },
           body: JSON.stringify({title,discription,tag}) 
         });
-     
-
-        console.log("Adding a new note") 
-        const note={
-          "_id": "62a88692c6e8asadae5956dc",
-          "user": "62a7188865bb03f7858e8560",
-          "title": title,
-          "discription": discription,
-          "tag": tag,
-          "date": "2022-06-14T13:01:06.662Z",
-          "__v": 0
-        };
+        const note=await response.json();
         setNotes(notes.concat(note))
       }
       // delete a note
@@ -72,24 +61,28 @@ const NoteState=(props)=>{
       const  editNote=async(id,title,discription,tag)=>{
         //API call
         const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJhNzE4ODg2NWJiMDNmNzY1OGU4NTYwIn0sImlhdCI6MTY1NTEyNDY3N30.Z0XVYfGRcSSwbK3vWKTxMuCz28HgO9edgQpaujyWqBM"
           },
           body: JSON.stringify({title,discription,tag}) 
         });
-        const json=response.json();
-      
+        // const json=response.json();
+        const json=await response.json();
+        console.log(json);
+       let newNotes=JSON.parse(JSON.stringify(notes))
         //client side function
-        for (let index = 0; index < notes.length; index++) {
-          const element = notes[index];
+        for (let index = 0; index < newNotes.length; index++) {
+          const element = newNotes[index];
           if(element._id===id){
-              element.title=title;
-              element.discription=discription;
-              element.tag=tag;
+            newNotes[index].title=title;
+            newNotes[index].discription=discription;
+            newNotes[index].tag=tag;
+            break;
           }
         }
+        setNotes(newNotes);
       }
     return(
         // <NoteContext.Provider value={{state,update}}>
