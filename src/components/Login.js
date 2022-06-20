@@ -25,10 +25,13 @@ const Login = (props) => {
             localStorage.setItem('token', json.authtoken); 
             // history.push("/");
             navigate("/");
+        props.showAlert("Logged in Successfully","success")
+
 
         }
         else{
-            alert("Invalid credentials");
+            props.showAlert("Invalid Credential","danger")
+
         }
     }
 
@@ -39,7 +42,7 @@ const Login = (props) => {
     return (
         <div>
             <form  onSubmit={handleSubmit}>
-                <div className="mb-3">
+                <div className="mb-3 my-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
