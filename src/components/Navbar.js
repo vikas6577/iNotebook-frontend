@@ -1,7 +1,13 @@
 import React,{useEffect} from "react";
 import {Link,useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  let navigate=useNavigate();
+  const handleLogout=()=>{
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
     // use location is used to get the pathname which can be used to assign different classname like here it is used for classname active it will be used in the home and about whichever is active accordingly
     let location = useLocation();
     useEffect(() => {
@@ -38,14 +44,14 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" >
+         {!localStorage.getItem('token')? <form className="d-flex" >
             <Link className="btn btn-primary mx-1" to="/login" role="button">
               Login
             </Link>
             <Link className="btn btn-primary mx-1" to="/signup" role="button">
               SignUp
             </Link>
-          </form>
+          </form>:<button onClick={handleLogout} className="btn btn-primary">Logout</button>}
         </div>
       </div>
     </nav>

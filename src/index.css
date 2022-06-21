@@ -17,3 +17,22 @@ i{
 .containersignup{
   padding: 5px;
 }
+.aboutcontainer{
+  background-color: rgb(82, 82, 214);
+  padding: 15px;
+
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+  width: 15%;
+  border-radius: 10px;
+  /* padding-bottom: 1000px; */
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  color: wheat;
+}

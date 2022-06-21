@@ -33,7 +33,8 @@ const onChange = (e)=>{
     setCredentials({...credentials, [e.target.name]: e.target.value})
 }
   return (
-    <div>
+    <div className='mt-2'>
+       <h2>SignUp to Use iNotebook</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group containersignup ">
           <label htmlFor="name">Name</label>
